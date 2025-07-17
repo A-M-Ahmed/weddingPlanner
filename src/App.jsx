@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from './components/Headers'
+import SignUpPage from './pages/SignUpPage'
 
 const App = () => {
   return (
@@ -7,6 +8,8 @@ const App = () => {
      {/* //* headers */}
      <Header />
      <main>
+      {/* //* unathenticated  */}
+      <SignUpPage />
 
      </main>
 

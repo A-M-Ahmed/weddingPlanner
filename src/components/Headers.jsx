@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 const Header = () => {
   const [isDropdonwOpen, setIsDropdownOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading,setIsloading] = useState(false)
 
 //   const { isLoggedIn, profile, isLoading, logout } = useAuth();
