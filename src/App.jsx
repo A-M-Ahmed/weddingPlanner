@@ -1,9 +1,17 @@
 import React from 'react'
+import Header from './components/Headers'
 
 const App = () => {
   return (
     <div>
-      <h1 className='text-4xl'>hello</h1>
+     {/* //* headers */}
+     <Header />
+     <main>
+
+     </main>
+
+     {/* //* footers */}
+
     </div>
   )
 }
