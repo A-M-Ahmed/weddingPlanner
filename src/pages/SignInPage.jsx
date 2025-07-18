@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-// import { signIn } from "../lib/auth";
+import { signIn } from "../lib/auth";
 import toast from "react-hot-toast";
 
 const SignInPage = () => {
