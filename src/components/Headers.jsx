@@ -3,25 +3,25 @@ import { CiMenuBurger } from "react-icons/ci";
 import { FaUser } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { Link, NavLink } from "react-router";
-// import { useAuth } from "../context/AuthProvider";
+import { useAuth } from "../context/AuthProvider";
 import toast from "react-hot-toast";
 
 const Header = () => {
   const [isDropdonwOpen, setIsDropdownOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLoading,setIsloading] = useState(false)
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoading,setIsloading] = useState(false)
 
-//   const { isLoggedIn, profile, isLoading, logout } = useAuth();
+  const { isLoggedIn, profile, isLoading, logout } = useAuth();
   const handleLogOut = () => {
     setIsDropdownOpen(false);
-    // logout();
+    logout();
     toast.success("log out.");
   };
   if (isLoading) {
     return (
       <div className="min-h-screen flex justify-center items-center">
-        <div className="animate-spin w-10 h-10 rounded-full border-t-2 border-b-2 border-t-purple-500 border-b-orange-500"></div>
+        <div className="animate-spin w-10 h-10 rounded-full border-t-2 border-b-2 border-t-purple-500 border-b-blue-500"></div>
       </div>
     );
   }
@@ -37,7 +37,7 @@ const Header = () => {
             <div className="flex-shrink-0">
               <Link
                 to="/"
-                className="bg-gradient-to-r from-[#e18037] to-purple-500 bg-clip-text text-xl leading-none font-bold text-transparent md:text-2xl"
+                className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-xl leading-none font-bold text-transparent md:text-2xl"
               >
                 wedding planner
               </Link>
@@ -50,7 +50,7 @@ const Header = () => {
                 >
                   home
                 </Link>
-                <div className="mx-2  group-hover:border-b-2 group-hover:border-[#e18037]"></div>
+                <div className="mx-2  group-hover:border-b-2 group-hover:border-blue-500"></div>
               </div>
               <div className="group ">
                 <Link
@@ -59,7 +59,7 @@ const Header = () => {
                 >
                   about us
                 </Link>
-                <div className="mx-2  group-hover:border-b-2 group-hover:border-orange-500"></div>
+                <div className="mx-2  group-hover:border-b-2 group-hover:border-blue-500"></div>
               </div>
               <div className="group ">
                 <Link
@@ -68,7 +68,7 @@ const Header = () => {
                 >
                   Contact us
                 </Link>
-                <div className="mx-2  group-hover:border-b-2 group-hover:border-orange-500"></div>
+                <div className="mx-2  group-hover:border-b-2 group-hover:border-blue-500"></div>
               </div>
 
               {isLoggedIn && (
@@ -80,7 +80,7 @@ const Header = () => {
                     >
                       create event
                     </Link>
-                    <div className="mx-2  group-hover:border-b-2 group-hover:border-orange-500"></div>
+                    <div className="mx-2  group-hover:border-b-2 group-hover:border-blue-500"></div>
                   </div>
                   <div className="group ">
                     <Link
@@ -89,7 +89,7 @@ const Header = () => {
                     >
                       articles
                     </Link>
-                    <div className="mx-2  group-hover:border-b-2 group-hover:border-orange-500"></div>
+                    <div className="mx-2  group-hover:border-b-2 group-hover:border-blue-500"></div>
                   </div>
                   <div className="group ">
                     <Link
@@ -97,7 +97,7 @@ const Header = () => {
                       className="group leading-relaxed font-medium capitalize"
                     >
 manage events                    </Link>
-                    <div className="mx-2  group-hover:border-b-2 group-hover:border-orange-500"></div>
+                    <div className="mx-2  group-hover:border-b-2 group-hover:border-blue-500"></div>
                   </div>
                 </>
               )}
@@ -117,17 +117,17 @@ manage events                    </Link>
                   <button
                     onMouseEnter={() => setIsDropdownOpen(true)}
                     onClick={() => setIsDropdownOpen(!isDropdonwOpen)}
-                    className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-gray-200 focus:ring-2 focus:ring-[##E18037] focus:ring-offset-2 focus:outline-none"
+                    className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-gray-200 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:outline-none"
                   >
-                    {/* {profile?.avatar_url ? (
+                    {profile?.avatar_url ? (
                       <img
                         src={profile?.avatar_url}
                         alt="user"
                         className="h-7 w-7 rounded-full object-cover"
                       />
                     ) : (
-                      <FaUser className="text-orange-500" />
-                    )} */}
+                      <FaUser className="text-blue-500" />
+                    )}
                   </button>
                   {isDropdonwOpen && (
                     <div
@@ -160,13 +160,13 @@ manage events                    </Link>
               <div className="flex items-center space-x-3">
                 <Link
                   to="signin"
-                  className="rounded-lg bg-[#e18037] p-1 px-3 py-2  text-sm font-semibold text-white capitalize focus:ring-2 focus:ring-orange-300 focus:ring-offset-2 focus:outline-none md:px-3 md:py-2 md:text-base"
+                  className="rounded-lg bg-blue-500 p-1 px-3 py-2  text-sm font-semibold text-white capitalize focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:outline-none md:px-3 md:py-2 md:text-base"
                 >
                   sign in
                 </Link>
                 <Link
                   to="signup"
-                  className="hidden rounded-lg p-1 text-sm font-semibold text-orange-500 capitalize hover:bg-orange-100 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:outline-none sm:inline md:px-3 md:py-2 md:text-base"
+                  className="hidden rounded-lg p-1 text-sm font-semibold text-blue-500 capitalize hover:bg-blue-100 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none sm:inline md:px-3 md:py-2 md:text-base"
                 >
                   sign up
                 </Link>
@@ -197,8 +197,8 @@ manage events                    </Link>
               <NavLink
                 className={({ isActive }) =>
                   isActive
-                    ? "w-full rounded-md border-l-3 border-rose-700 bg-orange-100 px-3 py-2 leading-relaxed font-medium capitalize"
-                    : "w-full rounded-md px-3 py-2 leading-relaxed font-medium capitalize hover:bg-orange-50"
+                    ? "w-full rounded-md border-l-3 border-rose-700 bg-blue-100 px-3 py-2 leading-relaxed font-medium capitalize"
+                    : "w-full rounded-md px-3 py-2 leading-relaxed font-medium capitalize hover:bg-blue-50"
                 }
                 to="/"
               >
@@ -208,8 +208,8 @@ manage events                    </Link>
                 to="/articles"
                 className={({ isActive }) =>
                   isActive
-                    ? "w-full rounded-md border-l-3 border-rose-700 bg-orange-100 px-3 py-2 leading-relaxed font-medium capitalize"
-                    : "w-full rounded-md px-3 py-2 leading-relaxed font-medium capitalize hover:bg-orange-50"
+                    ? "w-full rounded-md border-l-3 border-rose-700 bg-blue-100 px-3 py-2 leading-relaxed font-medium capitalize"
+                    : "w-full rounded-md px-3 py-2 leading-relaxed font-medium capitalize hover:bg-blue-50"
                 }
               >
                 articles
@@ -220,8 +220,8 @@ manage events                    </Link>
                     to="/write"
                     className={({ isActive }) =>
                       isActive
-                        ? "w-full rounded-md border-l-3 border-rose-700 bg-orange-100 px-3 py-2 leading-relaxed font-medium capitalize"
-                        : "w-full rounded-md px-3 py-2 leading-relaxed font-medium capitalize hover:bg-orange-50"
+                        ? "w-full rounded-md border-l-3 border-rose-700 bg-blue-100 px-3 py-2 leading-relaxed font-medium capitalize"
+                        : "w-full rounded-md px-3 py-2 leading-relaxed font-medium capitalize hover:bg-blue-50"
                     }
                   >
                     write
@@ -230,8 +230,8 @@ manage events                    </Link>
                     to="/profile"
                     className={({ isActive }) =>
                       isActive
-                        ? "w-full rounded-md border-l-3 border-rose-700 bg-orange-100 px-3 py-2 leading-relaxed font-medium capitalize"
-                        : "w-full rounded-md px-3 py-2 leading-relaxed font-medium capitalize hover:bg-orange-50"
+                        ? "w-full rounded-md border-l-3 border-rose-700 bg-blue-100 px-3 py-2 leading-relaxed font-medium capitalize"
+                        : "w-full rounded-md px-3 py-2 leading-relaxed font-medium capitalize hover:bg-blue-50"
                     }
                   >
                     profile
@@ -240,8 +240,8 @@ manage events                    </Link>
                     to="/myArticles"
                     className={({ isActive }) =>
                       isActive
-                        ? "w-full rounded-md border-l-3 border-rose-700 bg-orange-100 px-3 py-2 leading-relaxed font-medium capitalize"
-                        : "w-full rounded-md px-3 py-2 leading-relaxed font-medium capitalize hover:bg-orange-50"
+                        ? "w-full rounded-md border-l-3 border-rose-700 bg-blue-100 px-3 py-2 leading-relaxed font-medium capitalize"
+                        : "w-full rounded-md px-3 py-2 leading-relaxed font-medium capitalize hover:bg-blue-50"
                     }
                   >
                     my article
@@ -252,8 +252,8 @@ manage events                    </Link>
                   to="signup"
                   className={({ isActive }) =>
                     isActive
-                      ? "w-full rounded-md border-l-3 border-rose-700 bg-orange-100 px-3 py-2 leading-relaxed font-medium capitalize text-orange-500"
-                      : "w-full rounded-md px-3 py-2 leading-relaxed font-medium capitalize hover:bg-orange-50 text-orange-500"
+                      ? "w-full rounded-md border-l-3 border-rose-700 bg-blue-100 px-3 py-2 leading-relaxed font-medium capitalize text-blue-500"
+                      : "w-full rounded-md px-3 py-2 leading-relaxed font-medium capitalize hover:bg-blue-50 text-blue-500"
                   }
                 >
                   sign up
@@ -263,7 +263,7 @@ manage events                    </Link>
             {isLoggedIn && (
               <button
                 to="/myArticles"
-                className="w-full cursor-pointer rounded-md my-2 text-center px-3 py-2 leading-relaxed font-medium capitalize hover:bg-orange-50"
+                className="w-full cursor-pointer rounded-md my-2 text-center px-3 py-2 leading-relaxed font-medium capitalize hover:bg-blue-50"
               >
                 sign out
               </button>
