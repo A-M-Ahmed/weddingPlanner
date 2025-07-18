@@ -94,7 +94,7 @@ export async function getUserProfile(userId) {
 
         console.log('No profile found, attempting to create one for user:', userId)
 
-        const { data: userData, error: userError } = await supabase.auth.getUser()
+        const { data: userData } = await supabase.auth.getUser()
 
 
         console.log("True data", userData)
@@ -134,4 +134,24 @@ export async function getUserProfile(userId) {
     // console.log("Profile already exiting")
     return data
 
+}
+//* To check whether the user is signed in or signed out.
+export function onAuthChange(callback) {
+
+    const { data } = supabase.auth.onAuthStateChange((_event, session) => {
+
+        callback(session?.user || null, _event)
+    })
+
+
+    return () => {
+        data.subscription.unsubscribe()
+    }
+
+} 
+
+export async function signOut(){
+
+
+   await supabase.auth.signOut()
 }

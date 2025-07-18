@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { getUserProfile, onAuthChange, signOut } from "../lib/auth";
 
 const googleApi = import.meta.env.VITE_GOOGLE_API_KEY;
+// import { Content } from './../../node_modules/@google/generative-ai/dist/server/types/content';
 
 const AuthContext = createContext(null);
 
@@ -21,9 +22,11 @@ export function AuthProvider({ children }) {
   /*                        //* Gemini ai using for content                        */
   /* -------------------------------------------------------------------------- */
   const ai = new GoogleGenerativeAI(googleApi);
-  const sendContentToAi = async (content) => {
+  const sendContentToAi = async (groomName,brideName,DateWedding) => {
+    let content = `groom name : ${groomName} bride name ${brideName} date will happen the wedding,${DateWedding} make like 2 pragarah about this people `
     try {
       const model = ai.getGenerativeModel({ model: "gemini-2.5-flash" });
+
 
       const result = await model.generateContent(content);
 

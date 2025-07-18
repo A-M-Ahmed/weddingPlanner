@@ -140,7 +140,7 @@ const Profile = () => {
       <div className="max-w-xl mx-auto">
         <div className="bg-white rounded-md shadow-md ">
           {/* //* Profile div */}
-          <div className="bg-gradient-to-r from-orange-500 to-orange-600 py-4 sm:py-6 lg:py-8  rounded-t-md flex flex-col items-center">
+          <div className="bg-gradient-to-r from-indigo-500 to-indigo-600 py-4 sm:py-6 lg:py-8  rounded-t-md flex flex-col items-center">
             {/* //* image div container */}
             <div className="flex flex-col items-center">
               {/* //* profile image */}
@@ -159,7 +159,7 @@ const Profile = () => {
                   htmlFor="avatar-upload"
                   className="absolute bottom-0 right-0 cursor-pointer hover:scale-110 transition-transform duration-200 shadow-lg rounded-full"
                 >
-                  <MdOutlineLinkedCamera className=" bg-white w-10 h-10 rounded-full text-orange-500 p-2 " />
+                  <MdOutlineLinkedCamera className=" bg-white w-10 h-10 rounded-full text-indigo-500 p-2 " />
                 </label>
                 <input
                   type="file"
@@ -197,7 +197,7 @@ const Profile = () => {
                     disabled={isLoading}
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    className="py-3 disabled:cursor-not-allowed disabled:bg-gray-200  px-4 pl-12 focus:outline-orange-500  rounded-md shadow-md border-gray-300 border w-full text-lg"
+                    className="py-3 disabled:cursor-not-allowed disabled:bg-gray-200  px-4 pl-12 focus:outline-indigo-500  rounded-md shadow-md border-gray-300 border w-full text-lg"
                   />
                 </div>
               </div>
@@ -214,7 +214,7 @@ const Profile = () => {
                     id="email"
                     value={user?.email || ""}
                     disabled
-                    className="py-3 px-4 pl-12 focus:outline-orange-500 bg-gray-200 rounded-md shadow-md border-gray-300 border w-full text-lg"
+                    className="py-3 px-4 pl-12 focus:outline-indigo-500 bg-gray-200 rounded-md shadow-md border-gray-300 border w-full text-lg"
                   />
                 </div>
               </div>
@@ -224,7 +224,7 @@ const Profile = () => {
                 //   disabled={
                 //     isLoading || username?.length <= profile?.username.length
                 //   }
-                  className="bg-orange-500 py-2 px-8 disabled:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 rounded-md shadow-sm cursor-pointer capitalize font-medium text-white"
+                  className="bg-indigo-500 py-2 px-8 disabled:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-md shadow-sm cursor-pointer capitalize font-medium text-white"
                   type="submit"
                 >
                   {isLoading ? "Saving..." : "Save change"}
