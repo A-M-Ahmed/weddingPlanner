@@ -1,6 +1,8 @@
 import React from 'react'
 import Header from './components/Headers'
 import SignUpPage from './pages/SignUpPage'
+import SignInPage from './pages/SignInPage'
+import { Route, Routes } from 'react-router'
 
 const App = () => {
   return (
@@ -9,7 +11,11 @@ const App = () => {
      <Header />
      <main>
       {/* //* unathenticated  */}
-      <SignUpPage />
+      <Routes>
+        <Route path='signup' element = { <SignUpPage />} />
+        <Route path='signin' element = {<SignInPage />} />
+      </Routes>
+     
 
      </main>
 
