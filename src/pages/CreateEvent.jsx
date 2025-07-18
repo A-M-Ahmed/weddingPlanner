@@ -5,13 +5,17 @@ import {
   FaCalendarAlt,
   FaFemale,
   FaMale,
-  FaMapMarkerAlt
+  FaMapMarkerAlt,
 } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 
 import { FiCamera } from "react-icons/fi";
 import { MdMeetingRoom } from "react-icons/md";
 import { useAuth } from "../context/AuthProvider";
+import { CreateEventToSupabase } from "../lib/event";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
+import { uploadingImage } from "../lib/storage";
 
 const CreateWedding = () => {
   const [groomName, setGroomName] = useState("");
@@ -21,8 +25,11 @@ const CreateWedding = () => {
   const [groomPic, setGroomPic] = useState(null);
   const [bridePic, setBridePic] = useState(null);
   const [meetLink, setMeetLink] = useState("");
-  const {sendContentToAi,dataAi} = useAuth();
+  const { sendContentToAi, user } = useAuth();
+  const EditedMode = null;
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const navigate = useNavigate();
   const handleImageUpload = async (file) => {
     const filePath = `${uuidv4()}-${file.name}`;
     // const { data, error } = await supabase.storage
@@ -38,33 +45,60 @@ const CreateWedding = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const groomPicUrl = await handleImageUpload(groomPic);
-    const bridePicUrl = await handleImageUpload(bridePic);
-    const content = await sendContentToAi(groomName,brideName,dateWedding)
+    if (!user) {
+      toast.error("Please login Thank you.");
+      navigate("./signin");
+      return;
+    }
+    if (!groomName.trim() || !brideName.trim()) {
+      return toast("Please fill the form");
+    }
 
-    console.log("data", {
-      groom_name: groomName,
-      bride_name: brideName,
-      groom_pic: groomPicUrl,
-      bride_pic: bridePicUrl,
-      location,
-      date_time: dateWedding.toISOString(),
-      meet_link: meetLink,
-      content
-    });
+    if (!groomPic && !bridePic) {
+      toast.error("Please select the images-");
+      return;
+    }
 
-    // const { data, error } = await supabase.from("wedding_events").insert([
-    //   {
-    //     groom_name: groomName,
-    //     bride_name: brideName,
-    //     groom_pic: groomPicUrl,
-    //     bride_pic: bridePicUrl,
-    //     location,
-    //     date_time: date.toISOString(),
-    //     meet_link: meetLink,
-    //   },
-    // ]);
-    // if (!error) alert("Wedding created!");
+    setIsSubmitting(true);
+    try {
+   
+      const content = await sendContentToAi(groomName, brideName, dateWedding);
+
+      const groomPicUrl=  await uploadingImage(groomPic, user.id, "wedding-events");
+       const bridePicUrl = await uploadingImage(bridePic, user.id, "wedding-events");
+    
+
+      console.log("data", {
+        groom_name: groomName,
+        bride_name: brideName,
+        groom_pic: groomPicUrl,
+        bride_pic: bridePicUrl,
+        location,
+        date_time: dateWedding.toISOString(),
+        meet_link: meetLink,
+        content,
+      });
+      const newEvent = {
+        createrId: user.id,
+        groomName: groomName,
+        brideName: brideName,
+        groomPic: groomPicUrl.url,
+        bridePic: bridePicUrl.url,
+        location: location,
+        dateWedding: dateWedding,
+        meetLink: meetLink,
+        content: content,
+      };
+      const dataWedding = await CreateEventToSupabase(newEvent);
+      console.log("Data reached to the tabale", dataWedding);
+      toast.success("Data created successfully 😊");
+    } catch (error) {
+      console.error("Error", error);
+      toast.error("Failed to insert data:\n" + JSON.stringify(error, null, 2));
+      return;
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -160,7 +194,7 @@ const CreateWedding = () => {
             className="w-full rounded border border-indigo-200 p-2 focus:outline-indigo-200"
           />
         </label>
-        <label className="my-5 block cursor-pointer">
+        <label className="my-5 cursor-pointer">
           <span className="my-2 flex items-center gap-1">
             <FaCalendarAlt className="text-indigo-500" /> Date & Time
           </span>
@@ -175,9 +209,10 @@ const CreateWedding = () => {
         </label>
         <button
           type="submit"
-          className="w-full cursor-pointer rounded bg-indigo-500 px-4 py-2 text-white hover:bg-indigo-600"
+          disabled={isSubmitting}
+          className="my-2 mt-6 w-full cursor-pointer rounded bg-indigo-500 px-4 py-2 text-white hover:bg-indigo-600 disabled:bg-indigo-200"
         >
-          Create Event
+          {isSubmitting ? "Creating...." : "   Create Event "}
         </button>
       </form>
     </div>
