@@ -93,7 +93,7 @@ const Header = () => {
                   </div>
                   <div className="group ">
                     <Link
-                      to="/manage-articles"
+                      to="/manageEvents"
                       className="group leading-relaxed font-medium capitalize"
                     >
 manage events                    </Link>

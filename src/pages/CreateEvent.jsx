@@ -26,9 +26,10 @@ const CreateWedding = () => {
   const [bridePic, setBridePic] = useState(null);
   const [meetLink, setMeetLink] = useState("");
   const { sendContentToAi, user } = useAuth();
-  const EditedMode = null;
+  const EditedMode = false;
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  // ** unsplash
+  const unsplash = import.meta.env.VITE_UNSPLASH_API;
   const navigate = useNavigate();
   const handleImageUpload = async (file) => {
     const filePath = `${uuidv4()}-${file.name}`;
@@ -60,13 +61,21 @@ const CreateWedding = () => {
     }
 
     setIsSubmitting(true);
+    let dataWedding = null;
     try {
-   
-      const content = await sendContentToAi(groomName, brideName, dateWedding);
+      
 
-      const groomPicUrl=  await uploadingImage(groomPic, user.id, "wedding-events");
-       const bridePicUrl = await uploadingImage(bridePic, user.id, "wedding-events");
-    
+      const groomPicUrl = await uploadingImage(
+        groomPic,
+        user.id,
+        "wedding-events",
+      );
+      const bridePicUrl = await uploadingImage(
+        bridePic,
+        user.id,
+        "wedding-events",
+      );
+   
 
       console.log("data", {
         groom_name: groomName,
@@ -76,9 +85,9 @@ const CreateWedding = () => {
         location,
         date_time: dateWedding.toISOString(),
         meet_link: meetLink,
-        content,
+   
       });
-      const newEvent = {
+      let newEvent = {
         createrId: user.id,
         groomName: groomName,
         brideName: brideName,
@@ -87,17 +96,82 @@ const CreateWedding = () => {
         location: location,
         dateWedding: dateWedding,
         meetLink: meetLink,
-        content: content,
+      
       };
-      const dataWedding = await CreateEventToSupabase(newEvent);
-      console.log("Data reached to the tabale", dataWedding);
-      toast.success("Data created successfully 😊");
+      if (EditedMode) {
+        // update
+      } else {
+        const content = await sendContentToAi(groomName, brideName, dateWedding);
+           const unsplashImage = await fetchWeddingImage(unsplash);
+
+        newEvent = {
+          ...newEvent,
+          content: content,
+          imageHero: unsplashImage
+        }
+        dataWedding = await CreateEventToSupabase(newEvent);
+        console.log("Data reached to the tabale", dataWedding);
+        toast.success("Data created successfully 😊");
+      }
     } catch (error) {
       console.error("Error", error);
       toast.error("Failed to insert data:\n" + JSON.stringify(error, null, 2));
       return;
     } finally {
       setIsSubmitting(false);
+    }
+  };
+  const fetchWeddingImage = async (unsplashKey) => {
+    try {
+      // Keywords to emphasize the venue/place itself, minimizing people
+      const query =
+        "wedding venue empty OR wedding ceremony location OR wedding reception setup OR chapel interior OR outdoor wedding space OR picturesque wedding spot";
+
+      // Step 1: Get total pages for the query
+      const countRes = await fetch(
+        `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=1&client_id=${unsplashKey}`,
+      );
+      const countData = await countRes.json();
+      console.log("countData for initial query:", countData);
+      const totalPages = Math.min(countData.total_pages, 100); // Unsplash limits to 100 pages for search results
+
+      if (totalPages === 0) {
+        return "no image available";
+      }
+
+      // Step 2: Pick a random page
+      const randomPage = Math.floor(Math.random() * totalPages) + 1;
+
+      // Step 3: Fetch random images from that page
+      const res = await fetch(
+        `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=10&page=${randomPage}&orientation=landscape&client_id=${unsplashKey}`,
+      );
+      const data = await res.json();
+
+      const results = data.results;
+      if (!results || results.length === 0) {
+        // Fallback if the random page didn't yield results
+        // Try fetching from page 1 as a last resort, or return no image
+        const fallbackRes = await fetch(
+          `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=10&page=1&orientation=landscape&client_id=${unsplashKey}`,
+        );
+        const fallbackData = await fallbackRes.json();
+        const fallbackResults = fallbackData.results;
+        if (!fallbackResults || fallbackResults.length === 0) {
+          return "no image found";
+        }
+        const randomImage =
+          fallbackResults[Math.floor(Math.random() * fallbackResults.length)];
+        return randomImage.urls.regular;
+      }
+
+      // Step 4: Pick a random image from the retrieved results
+      const randomImage = results[Math.floor(Math.random() * results.length)];
+
+      return randomImage.urls.regular;
+    } catch (error) {
+      console.error("Error fetching Unsplash image:", error);
+      return "fallback-image.jpg"; // Optional default image
     }
   };
 
@@ -213,6 +287,12 @@ const CreateWedding = () => {
           className="my-2 mt-6 w-full cursor-pointer rounded bg-indigo-500 px-4 py-2 text-white hover:bg-indigo-600 disabled:bg-indigo-200"
         >
           {isSubmitting ? "Creating...." : "   Create Event "}
+        </button>
+        <button
+          type="button"
+          className="my-2 mt-6 w-full cursor-pointer rounded bg-indigo-500 px-4 py-2 text-white hover:bg-indigo-600 disabled:bg-indigo-200"
+        >
+          Cancel
         </button>
       </form>
     </div>

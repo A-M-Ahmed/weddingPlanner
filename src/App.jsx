@@ -1,15 +1,16 @@
-import React from "react";
-import  { Toaster } from "react-hot-toast";
-import Header from "./components/Headers";
-import SignUpPage from "./pages/SignUpPage";
-import SignInPage from "./pages/SignInPage";
+import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router";
-import CreateWedding from "./pages/CreateEvent";
-import { AuthProvider } from "./context/AuthProvider";
-import UnAuthenticatedRoutes from "./components/UnauthenticatedRoutes";
+import Header from "./components/Headers";
 import ProtectedRoutes from "./components/ProtectedRoutes";
-import Profile from "./pages/Profile";
+import UnAuthenticatedRoutes from "./components/UnauthenticatedRoutes";
+import { AuthProvider } from "./context/AuthProvider";
+import CreateWedding from "./pages/CreateEvent";
 import HomePage from "./pages/HomePage";
+import ManageEvents from "./pages/ManageEvents";
+import Profile from "./pages/Profile";
+import SignInPage from "./pages/SignInPage";
+import SignUpPage from "./pages/SignUpPage";
+import WeddingEvent from "./pages/WeddingEvent";
 
 const App = () => {
   return (
@@ -37,6 +38,10 @@ const App = () => {
               </UnAuthenticatedRoutes>
             }
           />
+
+          <Route path="/weddingEvents/:id" element ={<WeddingEvent />} />
+
+          {/* //* Protected Routes */}
           <Route
             path="/profile"
             element={
@@ -53,6 +58,19 @@ const App = () => {
               </ProtectedRoutes>
             }
           />
+          <Route
+            path="/create-event/:id"
+            element={
+              <ProtectedRoutes>
+                <CreateWedding />
+              </ProtectedRoutes>
+            }
+          />
+          <Route path="/manageEvents" element = {
+            <ProtectedRoutes>
+              <ManageEvents />
+            </ProtectedRoutes>
+          }/>
         </Routes>
       </main>
 
