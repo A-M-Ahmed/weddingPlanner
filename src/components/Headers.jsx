@@ -75,7 +75,7 @@ const Header = () => {
                 <>
                   <div className="group ">
                     <Link
-                      to="/editor"
+                      to="/create-event"
                       className="group leading-relaxed font-medium capitalize"
                     >
                       create event
@@ -93,7 +93,7 @@ const Header = () => {
                   </div>
                   <div className="group ">
                     <Link
-                      to="/manage-articles"
+                      to="/manageEvents"
                       className="group leading-relaxed font-medium capitalize"
                     >
 manage events                    </Link>
@@ -110,7 +110,7 @@ manage events                    </Link>
               <>
                 <div className="text-base leading-relaxed font-medium text-gray-500">
                   <span>
-                    {/* {profile?.username ? profile?.username : "Hello User"} */}
+                    {profile?.username ? profile?.username : "Hello User"}
                   </span>
                 </div>
                 <div className="relative">

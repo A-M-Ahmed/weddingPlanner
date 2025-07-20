@@ -37,7 +37,7 @@ const SignInPage = () => {
   if (success) {
    return (
       <div className="flex min-h-screen items-center justify-center">
-        <div className="h-12 w-12 animate-spin rounded-full border-t-2 border-b-2 border-orange-500"></div>
+        <div className="h-12 w-12 animate-spin rounded-full border-t-2 border-b-2 border-blue-500"></div>
       </div>
     );
   }
@@ -71,7 +71,7 @@ const SignInPage = () => {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="my-2 w-full rounded-md px-3 py-2 focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                className="my-2 w-full rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 required
               />
             </div>
@@ -88,13 +88,13 @@ const SignInPage = () => {
                 placeholder="********"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="my-2 w-full rounded-md px-3 py-2 focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                className="my-2 w-full rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 required
               />
             </div>
 
             <button
-              className="my-1 w-full cursor-pointer rounded-md bg-orange-500 px-4 py-3 text-lg font-medium tracking-wide text-white hover:bg-orange-600 focus:right-2 focus:bg-orange-700 focus:ring-orange-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:bg-orange-800"
+              className="my-1 w-full cursor-pointer rounded-md bg-blue-500 px-4 py-3 text-lg font-medium tracking-wide text-white hover:bg-blue-600 focus:right-2 focus:bg-blue-700 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:bg-blue-800"
               disabled={isLoading}
             >
               {isLoading ? "Sign in...." : "Sign in"}
@@ -106,7 +106,7 @@ const SignInPage = () => {
               Don't have an account ?
               <Link
                 to="/signup"
-                className="ml-2 text-lg font-medium text-orange-500 capitalize"
+                className="ml-2 text-lg font-medium text-blue-500 capitalize"
               >
                 sign up
               </Link>

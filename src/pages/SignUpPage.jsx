@@ -102,7 +102,7 @@ const SignUpPage = () => {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="my-2 w-full rounded-md px-3 py-2 focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                className="my-2 w-full rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
             required
 
               />
@@ -119,7 +119,7 @@ const SignUpPage = () => {
                 placeholder="Enter your name"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="my-2 w-full rounded-md px-3 py-2 focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                className="my-2 w-full rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 required
               />
             </div>
@@ -135,7 +135,7 @@ const SignUpPage = () => {
                 placeholder="********"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="my-2 w-full rounded-md px-3 py-2 focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                className="my-2 w-full rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 required
               />
             </div>
@@ -151,12 +151,12 @@ const SignUpPage = () => {
                 placeholder="********"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="my-2 w-full rounded-md px-3 py-2 focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                className="my-2 w-full rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 required
               />
             </div>
             <button
-              className="my-1 w-full cursor-pointer rounded-md bg-[#e18037] px-4 py-3 text-lg font-medium tracking-wide text-white hover:bg-[#af8565] focus:right-2 focus:bg-[#d7915b] focus:ring-orange-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:bg-orange-800"
+              className="my-1 w-full cursor-pointer rounded-md bg-blue-500 px-4 py-3 text-lg font-medium tracking-wide text-white hover:bg-blue-600 focus:right-2 focus:bg-blue-700 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:bg-blue-800"
               disabled={isLoading}
             >
               {isLoading ? "Creating account...." : "Create an account"}
@@ -168,7 +168,7 @@ const SignUpPage = () => {
               Already have an account ?
               <Link
                 to="/signin"
-                className="ml-2 text-lg font-medium text-orange-500 capitalize"
+                className="ml-2 text-lg font-medium text-blue-500 capitalize"
               >
                 sign in
               </Link>
