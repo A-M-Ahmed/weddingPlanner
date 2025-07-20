@@ -31,10 +31,12 @@ export const uploadingImage = async (file, userId, bucket = "featured-image") =>
         //* if it is successfully to upload the image then get the url
 
         const { data: url } = supabase.storage.from(bucket).getPublicUrl(filePath)
+        const previw = URL.createObjectURL(file);
 
         return {
             path: filePath,
-            url: url.publicUrl
+            url: url.publicUrl,
+            previw
         }
     } catch (error) {
 

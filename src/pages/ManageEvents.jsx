@@ -40,14 +40,23 @@ const ManageEvents = () => {
   const [isPending, startTransitions] = useTransition();
   const { user } = useAuth();
   const navigate = useNavigate();
+  useEffect(() => {
+    if (user) {
+      fetchDataCreaterEvent();
+      // console.log("woringkk");
+        
 
+    } else {
+      navigate("/signin");
+    }
+  }, [user]);
   const fetchDataCreaterEvent = async () => {
     setIsLoading(true);
     try {
       const { events, count } = await getEventsByCreater(user.id, {
         limit: 100,
       });
-
+      console.log("events newss",events)
       setEvent(events);
       setTotalCount(count);
       console.log("Successfully loaded or fetch", events);
@@ -64,20 +73,8 @@ const ManageEvents = () => {
 
 
 
-  useEffect(() => {
-  
 
-  }, []);
-  useEffect(() => {
-    if (user) {
-      fetchDataCreaterEvent();
-      // console.log("woringkk");
-        
 
-    } else {
-      navigate("/signin");
-    }
-  }, [user]);
 
 
   //* format the date
@@ -249,7 +246,6 @@ const ManageEvents = () => {
                               >
                                 guests
                               </th>
-                           
                               <th
                                 scope="col"
                                 className=" capitalize tracking-wide text-left px-2"
@@ -259,7 +255,7 @@ const ManageEvents = () => {
                             </tr>
                           </thead>
                           <tbody className="divide-y-4 divide-gray-50 px-2 ">
-                            {optimisticEvents.map((event, ind) => (
+                            {optimisticEvents.map((event) => (
                               <tr
                                 className={`divide-gray-50 p-2 md:divide-x-4 `}
                                 key={event.id}
@@ -280,7 +276,7 @@ const ManageEvents = () => {
                                     )}
                                   </div>
                                 </td>
-                               
+                            
 
                                 {/* //* actins */}
                                 <td className="px-2 ">
