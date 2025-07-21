@@ -20,7 +20,7 @@ console.log("Insert payload:", {
         const { data, error } = await supabase.from("events")
             .insert({
                 
-                creater_id: newEvent.createrId,
+                creater_id: newEvent.creater_id,
                 groomName: newEvent.groomName,
                 brideName: newEvent.brideName,
                 groomPic: newEvent.groomPic,

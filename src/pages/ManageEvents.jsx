@@ -282,7 +282,7 @@ const ManageEvents = () => {
                                 <td className="px-2 ">
                                   <div className="flex justify-around">
                                     <Link
-                                      title="view Article"
+                                      title="view events wedding"
                                       to={`/weddingEvents/${event.id}`}
                                     >
                                       <FiEye className="text-indigo-500 hover:text-indigo-700 duration-150" />
