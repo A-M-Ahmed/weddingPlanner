@@ -11,6 +11,7 @@ import Profile from "./pages/Profile";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import WeddingEvent from "./pages/WeddingEvent";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -39,7 +40,7 @@ const App = () => {
             }
           />
 
-          <Route path="/weddingEvents/:id" element ={<WeddingEvent />} />
+          <Route path="/weddingEvent/:id" element ={<WeddingEvent />} />
 
           {/* //* Protected Routes */}
           <Route
@@ -75,6 +76,7 @@ const App = () => {
       </main>
 
       {/* //* footers */}
+      <Footer />
       <Toaster />
     </AuthProvider>
   );
