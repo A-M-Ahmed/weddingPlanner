@@ -24,6 +24,7 @@
     "react-markdown": "^8.0.7",
     "react-router": "^7.7.0",
     "react-router-dom": "^7.7.0",
+    "react-wavify": "^1.11.1",
     "remark-gfm": "^1.0.0",
     "remove-markdown": "^0.6.2",
     "swiper": "^11.2.10",
