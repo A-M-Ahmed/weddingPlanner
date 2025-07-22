@@ -6,7 +6,7 @@ import Wave from "react-wavify";
 
 const Footer = () => {
   return (
-    <footer className="relative bg-indigo-500 pt-20">
+    <footer className=" bg-indigo-500 pt-20">
       <div className=" ">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col justify-between space-y-3 divide-y divide-gray-400 px-5 text-white md:flex-row md:space-y-0 md:divide-y-0">
@@ -187,12 +187,12 @@ const Footer = () => {
         fill="#3f2accff"
         paused={false}
         style={{ display: "flex" }}
-        className=""
+  
         options={{
-          height: 20,
-          amplitude: 20,
+          height: 30,
+          amplitude: 40,
           speed: 0.15,
-          points: 3,
+          points: 5,
         }}
       />
     </footer>
