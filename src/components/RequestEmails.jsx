@@ -18,11 +18,7 @@ const RequestEmails = ({ eventId, weddingInfo }) => {
 
   // setIsSending(true)
   useEffect(() => {
-    const fetchDataNow = async () => {
-      const requestDataById = await fetchGuestByEventId(eventId);
-      setRequestData(requestDataById);
-      setIsSending(false);
-    };
+  
 
     fetchDataNow();
     // ** verify the supabase conneciton the table i want to use it and how many channels exist
@@ -145,6 +141,13 @@ const RequestEmails = ({ eventId, weddingInfo }) => {
       guestChannels.unsubscribe();
     };
   }, [eventId]);
+  //* fetching data
+  const fetchDataNow = async () => {
+      const requestDataById = await fetchGuestByEventId(eventId);
+      setRequestData(requestDataById);
+      setIsSending(false);
+    };
+  // * sending message to emails
 
   const sendMeetingInvite = (guestName, guestEmail) => {
     emailjs
@@ -168,6 +171,43 @@ const RequestEmails = ({ eventId, weddingInfo }) => {
         console.error("Failed to send invite:", err);
       });
   };
+
+/* -------------------------------------------------------------------------- */
+  /*                             //* Deleting comments                             */
+  /* -------------------------------------------------------------------------- */
+  const handleDelete = async (guestId) => {
+    if (!window.confirm("Are you sure to delete this ?")) return;
+    try {
+      // ** first delete the UI
+  
+      
+      setRequestData((prev) => {
+        const filterGuest = prev.filter(
+          (guId) => guId.id !== guestId
+        );
+        console.log("Guest removed. New count:", filterGuest.length);
+        return filterGuest;
+      });
+      // ** now delete from the supabase
+
+      const { data, error } = await supabase
+        .from("guests")
+        .delete()
+        .eq("id", guestId)
+        .select();
+
+      if (error) {
+        console.log("Error for deleting comment", error);
+      } else {
+        console.log("successfully for deleting comment", data);
+      }
+    } catch (error) {
+      console.error("Error for deleting comment", error);
+      toast.error("Failed to delete comment");
+      fetchDataNow();
+    }
+  };
+  
   //** @ todo loading */
   return (
     <div className="my-3">
@@ -175,8 +215,8 @@ const RequestEmails = ({ eventId, weddingInfo }) => {
         Requests attendees: {requestData.length}
       </h3>
       {requestData.length === 0 ? (
-        <div>
-          <p>
+        <div >
+          <p className="max-w-md mx-auto text-center">
             {" "}
             No one has RSVP'd yet. Please fill out the form if you'd like to
             attend the wedding.
@@ -219,7 +259,9 @@ const RequestEmails = ({ eventId, weddingInfo }) => {
                       >
                         {req.id == isSendingId ? "Sending..." : "Send Link"}
                       </button>
-                      <button className="inline-block cursor-pointer rounded-md bg-red-500 px-4 py-2 text-center text-xl text-white duration-200 hover:bg-red-400">
+                      <button
+                      onClick={()=> handleDelete(req.id)}
+                      className="inline-block cursor-pointer rounded-md bg-red-500 px-4 py-2 text-center text-xl text-white duration-200 hover:bg-red-400">
                         remove
                       </button>
                     </div>
