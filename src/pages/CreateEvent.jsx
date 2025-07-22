@@ -35,7 +35,7 @@ const CreateWedding = () => {
   // ** unsplash
   const unsplash = import.meta.env.VITE_UNSPLASH_API;
   const { id } = useParams();
-  const EditedMode = Boolean(id);
+  const isEditedMode = Boolean(id);
   const navigate = useNavigate();
   // const handleImageUpload = async (file) => {
   //   const filePath = `${uuidv4()}-${file.name}`;
@@ -52,7 +52,7 @@ const CreateWedding = () => {
 
   const navigator = useNavigate();
   useEffect(() => {
-    if (EditedMode) {
+    if (isEditedMode) {
       const fetchEventById = async () => {
         setGroomPic("")
         setBridePic("")
@@ -93,9 +93,9 @@ const CreateWedding = () => {
 
       fetchEventById();
     }
-  }, [id, EditedMode]);
+  }, [id, isEditedMode]);
 
-     console.log("groomURL",groomPic)
+    //  console.log("groomURL",groomPic)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -104,7 +104,7 @@ const CreateWedding = () => {
       navigate("./signin");
       return;
     }
-    if (EditedMode) {
+    if (isEditedMode) {
       if (!groomName.trim() || !brideName.trim()) {
         return toast("Please fill the form");
       }
@@ -152,22 +152,23 @@ const CreateWedding = () => {
         dateWedding: dateWedding,
         meetLink: meetLink,
       };
-      if (EditedMode) {
+      if (isEditedMode) {
         // update
         weddingDataAll = await updatingEventWedding(id, newEvent);
       } else {
         //* ai content
-        // const content = await sendContentToAi(
-        //   groomName,
-        //   brideName,
-        //   dateWedding,
-        // );
-        // const unsplashImage = await fetchWeddingImage(unsplash);
+        const content = await sendContentToAi(
+          groomName,
+          brideName,
+          dateWedding,
+        );
+        const unsplashImage = await fetchWeddingImage(unsplash);
 
+        console.log("nweEvents",newEvent)
         newEvent = {
           ...newEvent,
-          // content: content,
-          // imageHero: unsplashImage,
+          content: content,
+          imageHero: unsplashImage,
         };
         weddingDataAll = await CreateEventToSupabase(newEvent);
         console.log("Data reached to the tabale", weddingDataAll);
@@ -349,10 +350,10 @@ const CreateWedding = () => {
             className="my-2 mt-6 w-full cursor-pointer rounded bg-indigo-500 px-4 py-2 text-white hover:bg-indigo-600 disabled:bg-indigo-200"
           >
             {isSubmitting
-              ? EditedMode
+              ? isEditedMode
                 ? "updating..."
                 : "Creating...."
-              : EditedMode
+              : isEditedMode
                 ? "update"
                 : "   Create Event "}
           </button>
