@@ -39,7 +39,7 @@ const App = () => {
             }
           />
 
-          <Route path="/weddingEvents/:id" element ={<WeddingEvent />} />
+          <Route path="/weddingEvent/:id" element ={<WeddingEvent />} />
 
           {/* //* Protected Routes */}
           <Route

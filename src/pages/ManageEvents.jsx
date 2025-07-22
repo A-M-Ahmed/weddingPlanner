@@ -283,7 +283,7 @@ const ManageEvents = () => {
                                   <div className="flex justify-around">
                                     <Link
                                       title="view events wedding"
-                                      to={`/weddingEvents/${event.id}`}
+                                      to={`/weddingEvent/${event.id}`}
                                     >
                                       <FiEye className="text-indigo-500 hover:text-indigo-700 duration-150" />
                                     </Link>
