@@ -1,2 +1,12 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+#heroContact{
+    background-image: url("https://habibi-react.wpocean.com/static/media/page-title.a0b25eac647630380324.jpg");
+}
+
+@media (max-width: 576px) {
+  #heroContact {
+    background-image: url("https://media.istockphoto.com/id/2115833055/photo/an-elegant-formal-dining-tables-at-a-wedding-reception-with-with-white-plates-greenery.jpg?s=612x612&w=0&k=20&c=rTlOzmx3Yef43ODK5VLBEX19VMAtuL6fsFDNU6DMlCQ=");
+  }
+}

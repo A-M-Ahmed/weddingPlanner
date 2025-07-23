@@ -22,7 +22,14 @@ A modern, elegant web application that helps couples plan and visualize their pe
 | React                | Frontend framework                          |
 | Tailwind CSS         | UI styling                                  |
 | Supabase             | Backend, database, and file storage         |
-
+| EmailJS              | Send contact form submissions as email      |
+| Gemini API           | Generate intelligent wedding content        |
+| Unsplash API         | Fetch wedding-related images dynamically    |
+| React Hook Form      | Form handling                               |
+| React Toastify       | Toast messages for feedback                 |
+| React Wave Effect    | Button ripple animation for better UX       |
+| React Wavify / Wave  | Animated SVG wave backgrounds               |
+| Prettier             | Code formatting and style consistency       |
 
 
 ## 🚀 Getting Started
