@@ -1,12 +1,32 @@
-# React + Vite
+# 💍 Wedding Planner
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, elegant web application that helps couples plan and visualize their perfect wedding. The platform combines personalized planning features, AI-generated content, dynamic image rendering, and real-time form handling — all in a clean, responsive user experience.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📋 Features
 
-## Expanding the ESLint configuration
+- **📝 Contact Form with EmailJS** – Users can reach out to the planner via a styled contact form. Emails are sent using `emailjs` and messages are also stored in Supabase.
+- **🎨 AI-Generated Wedding Content** – Uses the **Gemini API (Google AI)** to suggest customized wedding themes, colors, texts, and plan ideas.
+- **🖼️ Dynamic Image Gallery** – Integrates with **Unsplash API** to auto-generate high-quality wedding-themed images based on user preferences.
+- **📄 About & Hero Pages** – Beautifully styled sections to represent the brand and its services.
+- **📬 RSVP System** – Users can manage guest lists and invitations.
+- **📱 Fully Responsive** – Optimized for mobile, tablet, and desktop screens.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🧑‍💻 Tech Stack
+
+| Technology          | Purpose                                     |
+|----------------------|---------------------------------------------|
+| React                | Frontend framework                          |
+| Tailwind CSS         | UI styling                                  |
+| Supabase             | Backend, database, and file storage         |
+
+
+
+## 🚀 Getting Started
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/wedding-planner.git
