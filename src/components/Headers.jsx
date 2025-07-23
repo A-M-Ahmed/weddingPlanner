@@ -57,16 +57,16 @@ const Header = () => {
                   to="/about"
                   className="group leading-relaxed font-medium capitalize"
                 >
-                  about us
+                  about 
                 </Link>
                 <div className="mx-2 group-hover:border-b-2 group-hover:border-blue-500"></div>
               </div>
               <div className="group">
                 <Link
-                  to="/about"
+                  to="/contact"
                   className="group leading-relaxed font-medium capitalize"
                 >
-                  Contact us
+                  Contact 
                 </Link>
                 <div className="mx-2 group-hover:border-b-2 group-hover:border-blue-500"></div>
               </div>
@@ -82,15 +82,7 @@ const Header = () => {
                     </Link>
                     <div className="mx-2 group-hover:border-b-2 group-hover:border-blue-500"></div>
                   </div>
-                  <div className="group">
-                    <Link
-                      to="/articles"
-                      className="group leading-relaxed font-medium capitalize"
-                    >
-                      articles
-                    </Link>
-                    <div className="mx-2 group-hover:border-b-2 group-hover:border-blue-500"></div>
-                  </div>
+                 
                   <div className="group">
                     <Link
                       to="/manageEvents"
@@ -206,26 +198,36 @@ const Header = () => {
                 home
               </NavLink>
               <NavLink
-                to="/articles"
+                to="/about"
                 className={({ isActive }) =>
                   isActive
                     ? "w-full rounded-md border-l-3 border-rose-700 bg-blue-100 px-3 py-2 leading-relaxed font-medium capitalize"
                     : "w-full rounded-md px-3 py-2 leading-relaxed font-medium capitalize hover:bg-blue-50"
                 }
               >
-                articles
+                About
               </NavLink>
-              {isLoggedIn ? (
-                <>
-                  <NavLink
-                    to="/write"
+                   <NavLink
+                    to="/contact"
                     className={({ isActive }) =>
                       isActive
                         ? "w-full rounded-md border-l-3 border-rose-700 bg-blue-100 px-3 py-2 leading-relaxed font-medium capitalize"
                         : "w-full rounded-md px-3 py-2 leading-relaxed font-medium capitalize hover:bg-blue-50"
                     }
                   >
-                    write
+                    Contact
+                  </NavLink>
+              {isLoggedIn ? (
+                <>
+                  <NavLink
+                    to="/create-event"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "w-full rounded-md border-l-3 border-rose-700 bg-blue-100 px-3 py-2 leading-relaxed font-medium capitalize"
+                        : "w-full rounded-md px-3 py-2 leading-relaxed font-medium capitalize hover:bg-blue-50"
+                    }
+                  >
+                    create Event
                   </NavLink>
                   <NavLink
                     to="/profile"
@@ -238,15 +240,16 @@ const Header = () => {
                     profile
                   </NavLink>
                   <NavLink
-                    to="/myArticles"
+                    to="/manageEvents"
                     className={({ isActive }) =>
                       isActive
                         ? "w-full rounded-md border-l-3 border-rose-700 bg-blue-100 px-3 py-2 leading-relaxed font-medium capitalize"
                         : "w-full rounded-md px-3 py-2 leading-relaxed font-medium capitalize hover:bg-blue-50"
                     }
                   >
-                    my article
+                    manage Event
                   </NavLink>
+             
                 </>
               ) : (
                 <NavLink
@@ -263,7 +266,8 @@ const Header = () => {
             </nav>
             {isLoggedIn && (
               <button
-                to="/myArticles"
+              onClick={handleLogOut}
+                
                 className="my-2 w-full cursor-pointer rounded-md px-3 py-2 text-center leading-relaxed font-medium capitalize hover:bg-blue-50"
               >
                 sign out
