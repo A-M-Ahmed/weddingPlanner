@@ -25,3 +25,4 @@ dist-ssr
 .env
 .prettierrc
 tailwind.config.js
+README.md
