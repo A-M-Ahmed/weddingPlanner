@@ -25,7 +25,7 @@ const ManageEvents = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [events, setEvent] = useState([]);
   const [errors, setErrors] = useState(null);
-  const [totalCount, setTotalCount] = useState(0);
+  // const [totalCount, setTotalCount] = useState(0);
   const [eventDeleting, setEventDeleting] = useState(null); //? as object
   const [isDeleting, setIsDeleting] = useState(false); //? to be busy the user
 
@@ -53,12 +53,12 @@ const ManageEvents = () => {
   const fetchDataCreaterEvent = async () => {
     setIsLoading(true);
     try {
-      const { events, count } = await getEventsByCreater(user.id, {
+      const { events } = await getEventsByCreater(user.id, {
         limit: 100,
       });
       console.log("events newss",events)
       setEvent(events);
-      setTotalCount(count);
+      // setTotalCount(count);
       console.log("Successfully loaded or fetch", events);
       // toast.success("Successfully loaded");
     } catch (error) {
@@ -111,7 +111,7 @@ const ManageEvents = () => {
       setEvent((prev) =>
         prev.filter((prev) => prev.id !== eventDeleting.id)
       );
-      setTotalCount((prev) => prev - 1);
+      // setTotalCount((prev) => prev - 1);
 
       await deleteEvent(eventDeleting.id);
       setEventDeleting(null);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthProvider";
+// import { useAuth } from "../context/AuthProvider";
 import supabase from "../lib/supabase";
 import fetchGuestByEventId from "../lib/guests";
 import emailjs from "@emailjs/browser";
@@ -10,9 +10,8 @@ const templateId = import.meta.env.VITE_TEMPLATE_ID;
 const apiEmail = import.meta.env.VITE_EMAIL_API;
 
 const RequestEmails = ({ eventId, weddingInfo }) => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const [requestData, setRequestData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [isSending, setIsSending] = useState(true);
   const [isSendingId, setIsSendingId] = useState(null);
 
@@ -136,8 +135,6 @@ const RequestEmails = ({ eventId, weddingInfo }) => {
     // console.log("evnet id inside of useevffet",eventId)
     //* then clean up
     return () => {
-      // ** this line can be coused error to be remove the channel and see console websocet or connection fialed what you do is just do unsubscribe
-      // supabase.removeAllChannels(commentChannels);
       guestChannels.unsubscribe();
     };
   }, [eventId]);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { MdOutlineLinkedCamera } from "react-icons/md";
 import { useAuth } from "../context/AuthProvider";
 import { CiMail, CiUser } from "react-icons/ci";
@@ -21,20 +21,22 @@ const Profile = () => {
     }
   }, [user]);
 
-  //* fetch the avatar_url and user name from the table
+  /* -------------------------------------------------------------------------- */
+  /*          //* fetch the avatar_url and user name from the table             */
+  /* -------------------------------------------------------------------------- */
 
-  const fetchProfile = async () => {
+  const fetchProfile = useCallback(async () => {
+    if (!user) return;
     try {
       const { username, avatar_url } = await getUserProfile(user.id);
       if (username) {
         setAvatar_url(avatar_url);
         setUsername(username);
       }
-      // console.log("Profile fetch  is succesfully", { username, avatar_url });
     } catch (error) {
-      throw new toast.error(`Error for fetching ${error.message}`);
+      toast.error(`Error for fetching ${error.message}`);
     }
-  };
+  }, [user]);
 
   // ** first to see the image as UI how does look like the avatar
 

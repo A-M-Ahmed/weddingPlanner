@@ -1,0 +1,36 @@
+
+C:\Users\abdir\Desktop\weddingPlanner\src\components\RequestEmails.jsx
+    2:10  error    'useAuth' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                   no-unused-vars
+  139:6   warning  React Hook useEffect has a missing dependency: 'fetchDataNow'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  144:7   error    'setIsSending' is not defined                                                                                    no-undef
+  166:9   error    'setIsSending' is not defined                                                                                    no-undef
+
+C:\Users\abdir\Desktop\weddingPlanner\src\context\AuthProvider.jsx
+  89:17  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\abdir\Desktop\weddingPlanner\src\pages\CreateEvent.jsx
+   20:37  error  'useAuth' is not defined                no-undef
+   24:18  error  'useParams' is not defined              no-undef
+   26:20  error  'useNavigate' is not defined            no-undef
+   47:38  error  'getEventById' is not defined           no-undef
+   56:13  error  'toast' is not defined                  no-undef
+   77:11  error  'toast' is not defined                  no-undef
+   90:7   error  'toast' is not defined                  no-undef
+   96:16  error  'toast' is not defined                  no-undef
+  100:16  error  'toast' is not defined                  no-undef
+  105:7   error  'toast' is not defined                  no-undef
+  144:32  error  'updatingEventWedding' is not defined   no-undef
+  160:32  error  'CreateEventToSupabase' is not defined  no-undef
+  162:9   error  'toast' is not defined                  no-undef
+  167:7   error  'toast' is not defined                  no-undef
+
+C:\Users\abdir\Desktop\weddingPlanner\src\pages\ManageEvents.jsx
+  40:10  error    'isPending' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                  no-unused-vars
+  52:6   warning  React Hook useEffect has missing dependencies: 'fetchDataCreaterEvent' and 'navigate'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  56:23  error    'count' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                      no-unused-vars
+
+C:\Users\abdir\Desktop\weddingPlanner\src\pages\Profile.jsx
+  22:6  warning  React Hook useEffect has a missing dependency: 'fetchProfile'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+✖ 23 problems (20 errors, 3 warnings)
+

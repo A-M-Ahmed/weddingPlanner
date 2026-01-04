@@ -1,3 +1,4 @@
+import { Suspense, lazy } from "react";
 import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router";
 import Footer from "./components/Footer";
@@ -5,15 +6,16 @@ import Header from "./components/Headers";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import UnAuthenticatedRoutes from "./components/UnauthenticatedRoutes";
 import { AuthProvider } from "./context/AuthProvider";
-import AboutUs from "./pages/AboutUs";
-import ContactPage from "./pages/ContactPage";
-import CreateWedding from "./pages/CreateEvent";
-import HomePage from "./pages/HomePage";
-import ManageEvents from "./pages/ManageEvents";
-import Profile from "./pages/Profile";
-import SignInPage from "./pages/SignInPage";
-import SignUpPage from "./pages/SignUpPage";
-import WeddingEvent from "./pages/WeddingEvent";
+
+const AboutUs = lazy(() => import("./pages/AboutUs"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
+const CreateWedding = lazy(() => import("./pages/CreateEvent"));
+const HomePage = lazy(() => import("./pages/HomePage"));
+const ManageEvents = lazy(() => import("./pages/ManageEvents"));
+const Profile = lazy(() => import("./pages/Profile"));
+const SignInPage = lazy(() => import("./pages/SignInPage"));
+const SignUpPage = lazy(() => import("./pages/SignUpPage"));
+const WeddingEvent = lazy(() => import("./pages/WeddingEvent"));
 
 const App = () => {
   return (
@@ -21,65 +23,73 @@ const App = () => {
       {/* //* headers */}
       <Header />
       <main>
-        {/* //* unauthenticated  */}
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutUs />} />
-          <Route  path="/contact" element={<ContactPage />} />
-          {/* //*unauthenticated users redirect to these page */}
-          <Route
-            path="/signup"
-            element={
-              <UnAuthenticatedRoutes>
-                <SignUpPage />
-              </UnAuthenticatedRoutes>
-            }
-          />
-          <Route
-            path="/signin"
-            element={
-              <UnAuthenticatedRoutes>
-                <SignInPage />
-              </UnAuthenticatedRoutes>
-            }
-          />
+        <Suspense
+          fallback={
+            <div className="flex justify-center items-center py-3 min-h-screen">
+              <div className="w-12 h-12 rounded-full border-b animate-spin border-indigo-500"></div>
+            </div>
+          }
+        >
+          {/* //* unauthenticated  */}
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/contact" element={<ContactPage />} />
+            {/* //*unauthenticated users redirect to these page */}
+            <Route
+              path="/signup"
+              element={
+                <UnAuthenticatedRoutes>
+                  <SignUpPage />
+                </UnAuthenticatedRoutes>
+              }
+            />
+            <Route
+              path="/signin"
+              element={
+                <UnAuthenticatedRoutes>
+                  <SignInPage />
+                </UnAuthenticatedRoutes>
+              }
+            />
 
-          <Route path="/weddingEvent/:id" element={<WeddingEvent />} />
+            <Route path="/weddingEvent/:id" element={<WeddingEvent />} />
 
-          {/* //* Protected Routes */}
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoutes>
-                <Profile />
-              </ProtectedRoutes>
-            }
-          />
-          <Route
-            path="/create-event"
-            element={
-              <ProtectedRoutes>
-                <CreateWedding />
-              </ProtectedRoutes>
-            }
-          />
-          <Route
-            path="/create-event/:id"
-            element={
-              <ProtectedRoutes>
-                <CreateWedding />
-              </ProtectedRoutes>
-            }
-          />
-          <Route
-            path="/manageEvents"
-            element={
-              <ProtectedRoutes>
-                <ManageEvents />
-              </ProtectedRoutes>
-            }
-          />
-        </Routes>
+            {/* //* Protected Routes */}
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoutes>
+                  <Profile />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/create-event"
+              element={
+                <ProtectedRoutes>
+                  <CreateWedding />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/create-event/:id"
+              element={
+                <ProtectedRoutes>
+                  <CreateWedding />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/manageEvents"
+              element={
+                <ProtectedRoutes>
+                  <ManageEvents />
+                </ProtectedRoutes>
+              }
+            />
+          </Routes>
+        </Suspense>
       </main>
 
       {/* //* footers */}

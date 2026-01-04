@@ -26,7 +26,7 @@ const SignUpPage = () => {
     setError(null);
     // ** if the password dont much each other
     if (password !== confirmPassword) {
-      setError("Password don't much");
+      setError("Passwords do not match");
       setIsLoading(false);
       return;
     }

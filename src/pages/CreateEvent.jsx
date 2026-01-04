@@ -7,9 +7,6 @@ import {
   FaMale,
   FaMapMarkerAlt,
 } from "react-icons/fa";
-import { v4 as uuidv4 } from "uuid";
-
-import { FiCamera } from "react-icons/fi";
 import { MdMeetingRoom } from "react-icons/md";
 import { useAuth } from "../context/AuthProvider";
 import {
@@ -20,7 +17,6 @@ import {
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router";
 import { uploadingImage } from "../lib/storage";
-import { format } from "date-fns";
 
 const CreateWedding = () => {
   const [groomName, setGroomName] = useState("");
@@ -50,7 +46,7 @@ const CreateWedding = () => {
   //   return filePath;
   // };
 
-  const navigator = useNavigate();
+
   useEffect(() => {
     if (isEditedMode) {
       const fetchEventById = async () => {
@@ -67,7 +63,7 @@ const CreateWedding = () => {
 
           if (weddingEvent.createrId.id !== user.id) {
             toast.error("You don't have permission to edit");
-            return navigator("/signin");
+            return navigate("/signin");
           }
 
           //* then now update all the states
@@ -93,7 +89,7 @@ const CreateWedding = () => {
 
       fetchEventById();
     }
-  }, [id, isEditedMode]);
+  }, [id, isEditedMode, user, navigate]);
 
     //  console.log("groomURL",groomPic)
 

@@ -23,13 +23,7 @@ const EventCard = ({
       ? "..."
       : "");
   };
-   const createSafeHTML = (htmlContent) => {
-        if (!htmlContent) return '';
 
-        // Extract text only from HTML for excerpt
-        const textContent = htmlContent.replace(/<[^>]*>?/gm, '');
-        return textContent.substring(0, 150) + (textContent.length > 150 ? '...' : '');
-    }
   return (
     <div>
       <div  className="rounded-md shadow-md hover:-translate-y-2 group duration-500 ">

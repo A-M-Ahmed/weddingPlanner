@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 import { getEventById } from "../lib/event";
 import { format } from "date-fns";
-import { remarkGfm } from "remark-gfm";
+// import { remarkGfm } from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 import removeMarkdown from "remove-markdown";
 import ContactFormEvent from "../components/RvspFormEvent";
